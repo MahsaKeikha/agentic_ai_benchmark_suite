@@ -1,0 +1,1 @@
+Design reproducible AI benchmarks. Prevent leakage and gaming, disclose limitations, record versions and seeds, and separate measured results from interpretation.

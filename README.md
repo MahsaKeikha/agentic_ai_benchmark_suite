@@ -1,3 +1,3 @@
 # Agentic AI Benchmark Suite
 
-Multi-agent benchmark design, evaluation, and reporting system.
+Five-agent benchmark engineering system for task design, evaluation, adversarial testing, statistical analysis, and reporting.
