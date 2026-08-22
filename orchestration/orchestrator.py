@@ -8,7 +8,7 @@ from AGENTS.task_designer_agent import TaskDesignerAgent
 from orchestration.state import BenchmarkState
 
 SYSTEM_ID = "F38"
-SYSTEM_VERSION = "0.2.0"
+SYSTEM_VERSION = "1.0.0"
 
 
 def run_system(spec: dict) -> dict:
@@ -21,6 +21,7 @@ def run_system(spec: dict) -> dict:
     return {
         "system_id": SYSTEM_ID,
         "version": SYSTEM_VERSION,
+        "maturity": "L3 Gold Standard",
         "run_id": state.run_id,
         "tasks": state.tasks,
         "results": state.results,
