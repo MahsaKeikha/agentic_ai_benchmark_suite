@@ -1,10 +1,9 @@
 # Agentic AI Benchmark Suite
 
+**Maturity:** L3 Gold Standard candidate  
+**Version:** 1.0.0
+
 F38 is a multi-agent reference implementation for designing, executing, challenging, analyzing, and reporting AI benchmarks.
-
-## Maturity
-
-**L2 candidate.** The suite is deterministic and CI-gated, but L3 requires broader held-out suites, independent reproduction, and published benchmark artifacts.
 
 ## Architecture
 
@@ -14,9 +13,9 @@ Five agents own distinct responsibilities:
 2. **Evaluator** executes bounded 0 to 1 scoring contracts per task.
 3. **Adversarial Agent** checks leakage, gaming signals, duplicate identities, and suspicious score spread.
 4. **Statistics Agent** computes weighted score, pass rate, variance, and baseline regressions.
-5. **Reporting Agent** issues a reproducible pass/fail report with integrity and regression evidence.
+5. **Reporting Agent** applies fail-closed integrity, regression, pass-rate, and minimum-score gates.
 
-The benchmark fails when integrity checks fail or when configured baseline regressions exceed tolerance. Scores outside the declared range and malformed task sets are rejected instead of silently normalized.
+A benchmark fails when integrity checks fail, baseline regressions exceed tolerance, the required pass rate is missed, or the minimum weighted score is not met.
 
 ## Reproduce
 
@@ -25,17 +24,20 @@ python -m pip install -e '.[dev]'
 ruff check .
 pytest -q
 python evals/run_benchmarks.py
+python evals/heldout_suite.py
+python examples/minimal.py
+python examples/complete.py
 python run.py
 ```
 
-CI runs these gates on Python 3.10, 3.11, and 3.12.
+CI runs the complete gate on Python 3.10, 3.11, and 3.12. Python 3.12 publishes the held-out result artifact.
 
-## Benchmark contract
+## L3 evidence
 
-A benchmark specification contains a non-empty `tasks` list. Each task may define `id`, `observed_score`, `pass_threshold`, `difficulty`, and `weight`. Optional `baseline` values and `regression_tolerance` enable regression detection.
+Promotion requires all CI jobs green on the exact promotion commit, the eight-scenario held-out suite at 8/8 expected behavior, clean-checkout examples, a published result artifact, and recorded benchmark evidence.
 
 ## Limitations
 
-This repository demonstrates benchmark engineering patterns. Its bundled scenarios are intentionally small and offline. They do not establish universal model quality, safety, or statistical significance for a production deployment.
+This is a benchmark-engineering reference implementation. Passing bundled scenarios does not establish universal model quality, statistical significance, or production safety. Benchmark conclusions remain bounded by the task set, scoring contract, baselines, and threat model.
 
-See `docs/ARCHITECTURE.md`, `docs/EVALUATION.md`, and `docs/SAFETY.md` for design details.
+See `docs/ARCHITECTURE.md`, `docs/EVALUATION.md`, `docs/SAFETY.md`, and `docs/L3_AUDIT.md`.
