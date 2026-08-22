@@ -1,6 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name='agentic-ai-benchmark-suite'
-version='0.1.0'
-requires-python='>=3.11'
+name = "agentic-ai-benchmark-suite"
+version = "1.0.0"
+description = "L3 reference multi-agent benchmark engineering system"
+requires-python = ">=3.10"
+authors = [{name = "Mahsa Keikha"}]
+license = {text = "MIT"}
+readme = "README.md"
+keywords = ["agentic-ai", "benchmarking", "evaluation", "multi-agent", "reference-architecture"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
 [tool.pytest.ini_options]
-pythonpath=['.']
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["AGENTS*", "SKILLS*", "TOOLS*", "orchestration*"]
+namespaces = true
