@@ -16,14 +16,14 @@ def spec(tasks, **updates):
 
 
 SCENARIOS = [
-    ("healthy_scores", spec([{"id": "a", "observed_score": 0.9, "pass_threshold": 0.7, "weight": 1.0}]), "passed"),
-    ("below_threshold", spec([{"id": "a", "observed_score": 0.4, "pass_threshold": 0.7, "weight": 1.0}]), "failed"),
-    ("weighted_mix", spec([{"id": "a", "observed_score": 0.9, "pass_threshold": 0.6, "weight": 2.0}, {"id": "b", "observed_score": 0.7, "pass_threshold": 0.6, "weight": 1.0}]), "passed"),
-    ("regression", spec([{"id": "a", "observed_score": 0.7, "pass_threshold": 0.5}], baseline={"a": 0.9}, regression_tolerance=0.05), "failed"),
-    ("gaming_signal", spec([{"id": "a", "observed_score": 1.0, "pass_threshold": 0.5, "gaming_signal": True}]), "failed"),
-    ("leakage_signal", spec([{"id": "a", "observed_score": 0.9, "pass_threshold": 0.5, "leakage": True}]), "failed"),
-    ("difficulty_weighting", spec([{"id": "a", "observed_score": 0.8, "pass_threshold": 0.7, "difficulty": "hard", "weight": 2.0}]), "passed"),
-    ("two_task_failure", spec([{"id": "a", "observed_score": 0.9, "pass_threshold": 0.7}, {"id": "b", "observed_score": 0.2, "pass_threshold": 0.7}]), "failed"),
+    ("healthy_scores", spec([{"id": "a", "observed_score": 0.9, "pass_threshold": 0.7, "weight": 1.0}]), "pass"),
+    ("below_threshold", spec([{"id": "a", "observed_score": 0.4, "pass_threshold": 0.7, "weight": 1.0}]), "fail"),
+    ("weighted_mix", spec([{"id": "a", "observed_score": 0.9, "pass_threshold": 0.6, "weight": 2.0}, {"id": "b", "observed_score": 0.7, "pass_threshold": 0.6, "weight": 1.0}]), "pass"),
+    ("regression", spec([{"id": "a", "observed_score": 0.7, "pass_threshold": 0.5}], baseline={"weighted_score": 0.9}, regression_tolerance=0.05), "fail"),
+    ("gaming_signal", spec([{"id": "a", "observed_score": 1.0, "pass_threshold": 0.5, "gaming_signal": True}]), "fail"),
+    ("leakage_signal", spec([{"id": "a", "observed_score": 0.9, "pass_threshold": 0.5, "expose_reference": True, "answer": "hidden"}]), "fail"),
+    ("difficulty_weighting", spec([{"id": "a", "observed_score": 0.8, "pass_threshold": 0.7, "difficulty": "hard", "weight": 2.0}]), "pass"),
+    ("two_task_failure", spec([{"id": "a", "observed_score": 0.9, "pass_threshold": 0.7}, {"id": "b", "observed_score": 0.2, "pass_threshold": 0.7}]), "fail"),
 ]
 
 
