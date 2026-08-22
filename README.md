@@ -1,6 +1,6 @@
 # Agentic AI Benchmark Suite
 
-**Maturity:** L3 Gold Standard candidate  
+**Maturity:** L3 Gold Standard  
 **Version:** 1.0.0
 
 F38 is a multi-agent reference implementation for designing, executing, challenging, analyzing, and reporting AI benchmarks.
@@ -34,7 +34,7 @@ CI runs the complete gate on Python 3.10, 3.11, and 3.12. Python 3.12 publishes 
 
 ## L3 evidence
 
-Promotion requires all CI jobs green on the exact promotion commit, the eight-scenario held-out suite at 8/8 expected behavior, clean-checkout examples, a published result artifact, and recorded benchmark evidence.
+The promotion path requires all CI jobs green on the exact promotion commit, the eight-scenario held-out suite at 8/8 expected behavior, clean-checkout examples, artifact publication, and benchmark evidence recorded in `benchmarks/RESULTS.md`.
 
 ## Limitations
 
