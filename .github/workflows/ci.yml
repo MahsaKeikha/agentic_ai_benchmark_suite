@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   quality:
     runs-on: ubuntu-latest
@@ -23,5 +26,17 @@ jobs:
         run: pytest -q
       - name: Benchmark scenarios
         run: python evals/run_benchmarks.py
+      - name: Held-out reproducibility suite
+        run: python evals/heldout_suite.py
+      - name: Minimal example
+        run: python examples/minimal.py
+      - name: Complete example
+        run: python examples/complete.py
       - name: Smoke run
         run: python run.py
+      - name: Upload held-out results
+        if: matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: f38-heldout-results
+          path: benchmarks/heldout_results.json
